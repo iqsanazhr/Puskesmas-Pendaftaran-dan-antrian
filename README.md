@@ -1,66 +1,155 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistem Pendaftaran & Antrian Online Puskesmas Ajibarang
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Puskesmas Ajibarang](public/images/hospital_hero.png)
 
-## About Laravel
+Platform manajemen layanan kesehatan modern untuk Puskesmas Ajibarang, dirancang untuk mempermudah pendaftaran pasien, memantau antrian secara real-time, dan mengelola operasional puskesmas secara efisien.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Aplikasi ini dibangun menggunakan teknologi web modern untuk memastikan performa cepat, tampilan responsif, dan pengalaman pengguna yang premium.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Fitur Utama
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 1. Pendaftaran Pasien Online 📝
 
-## Learning Laravel
+-   Formulir pendaftaran yang mudah digunakan dengan validasi NIK (16 digit).
+-   Pemilihan poli tujuan dan dokter secara spesifik.
+-   Sistem tiket antrian otomatis.
+-   **Unified Auth**: Halaman login dan daftar yang terintegrasi dengan transisi halus.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 2. Monitor Antrian Real-time 📺
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   Dashboard antrian publik yang diperbarui secara otomatis (auto-refresh setiap 5 detik).
+-   Menampilkan nomor antrian yang sedang dipanggil dan sisa antrian.
+-   Indikator visual audio/animasi saat nomor dipanggil.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 3. Dashboard Admin & Petugas 👨‍💼
 
-## Laravel Sponsors
+-   **Admin Dashboard**: Kelola data pasien, data dokter, dan pesan masuk.
+-   **Leader Dashboard**: Halaman khusus untuk pimpinan melihat statistik dan laporan.
+-   Manajemen status antrian (Panggil, Lewati, Selesai).
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 4. Halaman Informasi Publik ℹ️
 
-### Premium Partners
+-   **Beranda**: Overview layanan dan CTA pendaftaran.
+-   **Profil**: Visi, Misi, dan Struktur Organisasi.
+-   **Layanan**: Daftar poli dan fasilitas kesehatan.
+-   **Kontak**: Formulir pengaduan/pertanyaan dan peta lokasi.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## 🛠️ Teknologi yang Digunakan
 
-## Contributing
+Project ini dibangun di atas stack teknologi yang powerful dan modern:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+-   **Backend Framework**: [Laravel 10](https://laravel.com) (PHP 8.1+)
+-   **Frontend Interactivity**: [Livewire 3](https://livewire.laravel.com) - Full-stack framework untuk antarmuka dinamis.
+-   **Styling**: [Tailwind CSS v3/v4](https://tailwindcss.com) - Framework CSS utility-first untuk desain custom yang cepat.
+-   **JavaScript**: [Alpine.js](https://alpinejs.dev) - Framework JS ringan untuk interaksi UI sederhana.
+-   **Database**: MySQL.
 
-## Code of Conduct
+## ⚙️ Persyaratan Sistem
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Sebelum menjalankan aplikasi, pastikan sistem Anda memiliki:
 
-## Security Vulnerabilities
+-   PHP >= 8.1
+-   Composer
+-   Node.js & NPM
+-   MySQL Database
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 📦 Cara Install & Menjalankan Project
 
-## License
+Ikuti langkah-langkah berikut untuk menjalankan project ini di komputer lokal Anda:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/iqsanazhr/Puskesmas-Pendaftaran-dan-antrian.git
+cd Puskesmas-Pendaftaran-dan-antrian
+```
+
+### 2. Install Dependensi PHP (Composer)
+
+```bash
+composer install
+```
+
+### 3. Install Dependensi Frontend (NPM)
+
+```bash
+npm install
+```
+
+### 4. Konfigurasi Environment
+
+Salin file `.env.example` ke `.env`:
+
+```bash
+cp .env.example .env
+```
+
+Buka file `.env` dan sesuaikan konfigurasi database Anda:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nama_database_anda
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 5. Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+### 6. Migrasi Database
+
+Jalankan migrasi untuk membuat tabel-tabel yang dibutuhkan (pastikan database sudah dibuat di MySQL/phpMyAdmin):
+
+```bash
+php artisan migrate
+# Atau jika ingin mengisi data dummy awal:
+php artisan migrate:refresh --seed
+```
+
+### 7. Jalankan Aplikasi
+
+Buka dua terminal terpisah untuk menjalankan server PHP dan build asset frontend:
+
+**Terminal 1 (Laravel Server):**
+
+```bash
+php artisan serve
+```
+
+**Terminal 2 (Vite Development Server):**
+
+```bash
+npm run dev
+```
+
+Akses aplikasi di: `http://127.0.0.1:8000`
+
+## 👥 Akun Demo (Jika Menggunakan Seeder)
+
+Jika Anda menjalankan `db:seed`, Anda bisa menggunakan akun berikut untuk testing:
+
+-   **Admin/Petugas**:
+
+    -   Email: `admin@puskesmas.com`
+    -   Password: `password`
+
+-   **Pasien**:
+    -   Email: `pasien@example.com`
+    -   Password: `password`
+
+## 🤝 Kontribusi
+
+Kontribusi selalu diterima! Silakan fork repository ini, buat branch fitur baru, dan kirim Pull Request.
+
+## 📄 Lisensi
+
+Project ini dilisensikan di bawah [MIT License](https://opensource.org/licenses/MIT).
+
+---
+
+**Dibuat dengan ❤️ untuk Kesehatan Masyarakat Ajibarang**
