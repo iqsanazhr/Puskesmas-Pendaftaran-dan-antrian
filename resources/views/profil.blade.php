@@ -44,78 +44,107 @@
                 class="absolute -bottom-24 -right-24 w-96 h-96 bg-teal-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000">
             </div>
 
-            <div class="mt-12 lg:mt-0 order-1 lg:order-2">
-                <h2 class="text-base font-bold text-medical-teal tracking-wide uppercase">Nilai-Nilai Kami</h2>
-                <h2 class="mt-2 text-4xl font-black text-slate-900 tracking-tight sm:text-5xl">Visi & Misi</h2>
-                <div class="mt-8 space-y-8">
-                    <div class="relative pl-8 border-l-4 border-medical-blue py-2">
-                        <h3 class="text-2xl font-bold text-medical-blue mb-2">Visi</h3>
-                        <p class="text-xl text-slate-600 italic leading-relaxed">
-                            "Menjadi Puskesmas Pilihan Utama Masyarakat dengan Pelayanan Prima dan Profesional
-                            Menuju Ajibarang Sehat."
-                        </p>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <!-- Left Column: Image -->
+                    <div class="relative order-2 lg:order-1">
+                        <div
+                            class="absolute inset-0 bg-medical-blue transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl opacity-20">
+                        </div>
+                        <div class="relative rounded-2xl shadow-xl overflow-hidden group">
+                            <div
+                                class="absolute inset-0 bg-medical-blue/20 group-hover:bg-transparent transition-colors duration-300">
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                alt="Medical Team"
+                                class="w-full h-full object-cover min-h-[500px] transform group-hover:scale-105 transition-transform duration-500">
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="flex items-center text-2xl font-bold text-medical-blue mb-4">
-                            <span class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
-                                    </path>
-                                </svg>
-                            </span>
-                            Misi
-                        </h3>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <div
-                                    class="shrink-0 w-6 h-6 rounded-full bg-teal-100 flex items-center justify-center mt-1 mr-3">
-                                    <svg class="w-4 h-4 text-teal-600" fill="none" class="" viewBox="0 0 24 24"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <span class="text-lg text-slate-600">Memberikan pelayanan kesehatan yang bermutu,
-                                    merata, dan terjangkau.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <div
-                                    class="shrink-0 w-6 h-6 rounded-full bg-teal-100 flex items-center justify-center mt-1 mr-3">
-                                    <svg class="w-4 h-4 text-teal-600" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <span class="text-lg text-slate-600">Meningkatkan profesionalisme sumber daya
-                                    manusia kesehatan.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <div
-                                    class="shrink-0 w-6 h-6 rounded-full bg-teal-100 flex items-center justify-center mt-1 mr-3">
-                                    <svg class="w-4 h-4 text-teal-600" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <span class="text-lg text-slate-600">Mendorong kemandirian masyarakat untuk hidup
-                                    sehat.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <div
-                                    class="shrink-0 w-6 h-6 rounded-full bg-teal-100 flex items-center justify-center mt-1 mr-3">
-                                    <svg class="w-4 h-4 text-teal-600" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <span class="text-lg text-slate-600">Mengembangkan sarana dan prasarana kesehatan
-                                    yang modern.</span>
-                            </li>
-                        </ul>
+
+                    <!-- Right Column: Visi Misi Content -->
+                    <div class="order-1 lg:order-2">
+                        <div class="mb-10 text-left">
+                            <h2 class="text-base font-bold text-medical-teal tracking-wide uppercase">Nilai-Nilai Kami</h2>
+                            <h2 class="mt-2 text-4xl font-black text-slate-900 tracking-tight sm:text-5xl">Visi & Misi</h2>
+                            <p class="mt-4 text-lg text-slate-500">
+                                Komitmen kami untuk memberikan layanan kesehatan terbaik bagi masyarakat Ajibarang.
+                            </p>
+                        </div>
+
+                        <div class="space-y-10">
+                            <!-- Visi -->
+                            <div class="relative pl-8 border-l-4 border-medical-blue">
+                                <h3 class="text-2xl font-bold text-medical-blue mb-3">Visi</h3>
+                                <p class="text-xl text-slate-700 italic leading-relaxed font-medium">
+                                    "Menjadi Puskesmas Pilihan Utama Masyarakat dengan Pelayanan Prima dan Profesional
+                                    Menuju Ajibarang Sehat."
+                                </p>
+                            </div>
+
+                            <!-- Misi -->
+                            <div>
+                                <h3 class="flex items-center text-2xl font-bold text-medical-blue mb-6">
+                                    <span class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                    Misi Kami
+                                </h3>
+                                <ul class="space-y-5">
+                                    <li class="flex items-start">
+                                        <div
+                                            class="shrink-0 w-6 h-6 rounded-full bg-teal-100 flex items-center justify-center mt-1 mr-4">
+                                            <svg class="w-4 h-4 text-teal-600" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-lg text-slate-600">Memberikan pelayanan kesehatan yang bermutu,
+                                            merata, dan terjangkau.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div
+                                            class="shrink-0 w-6 h-6 rounded-full bg-teal-100 flex items-center justify-center mt-1 mr-4">
+                                            <svg class="w-4 h-4 text-teal-600" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-lg text-slate-600">Meningkatkan profesionalisme sumber daya
+                                            manusia kesehatan.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div
+                                            class="shrink-0 w-6 h-6 rounded-full bg-teal-100 flex items-center justify-center mt-1 mr-4">
+                                            <svg class="w-4 h-4 text-teal-600" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-lg text-slate-600">Mendorong kemandirian masyarakat untuk hidup
+                                            sehat.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div
+                                            class="shrink-0 w-6 h-6 rounded-full bg-teal-100 flex items-center justify-center mt-1 mr-4">
+                                            <svg class="w-4 h-4 text-teal-600" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-lg text-slate-600">Mengembangkan sarana dan prasarana kesehatan
+                                            yang modern.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -131,26 +160,76 @@
                 menjamin pelayanan yang lebih baik dan akuntabel.</p>
 
             <div class="mt-16">
-                <div
-                    class="relative bg-white p-12 rounded-3xl shadow-xl border border-slate-100 inline-block max-w-4xl w-full">
-                    <!-- Decorative background elements -->
-                    <div
-                        class="absolute top-0 left-0 -mt-4 -ml-4 w-24 h-24 bg-blue-50 rounded-full mix-blend-multiply filter blur-xl opacity-70">
-                    </div>
-                    <div
-                        class="absolute bottom-0 right-0 -mb-4 -mr-4 w-24 h-24 bg-teal-50 rounded-full mix-blend-multiply filter blur-xl opacity-70">
-                    </div>
+                <div class="relative w-full max-w-5xl mx-auto">
+                    <!-- CSS Org Chart -->
+                    <div class="flex flex-col items-center">
+                        <!-- Level 1: Kepala -->
+                        <div class="flex flex-col items-center">
+                            <div
+                                class="bg-medical-blue text-white px-8 py-4 rounded-xl shadow-lg border-2 border-blue-600 w-64 text-center transform hover:scale-105 transition-transform duration-300 relative z-10">
+                                <h3 class="font-bold text-lg">Kepala Puskesmas</h3>
+                            </div>
+                            <!-- Connector -->
+                            <div class="h-10 w-0.5 bg-slate-300"></div>
+                            <div class="h-0.5 w-[calc(100%-8rem)] max-w-2xl bg-slate-300"></div>
+                            <div class="flex justify-between w-[calc(100%-8rem)] max-w-2xl">
+                                <div class="h-6 w-0.5 bg-slate-300"></div>
+                                <div class="h-6 w-0.5 bg-slate-300"></div>
+                            </div>
+                        </div>
 
-                    <div
-                        class="flex flex-col items-center justify-center space-y-4 py-12 border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50/50">
-                        <svg class="w-16 h-16 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0z">
-                            </path>
-                        </svg>
-                        <p class="text-slate-500 font-medium italic">Grafik Struktur Organisasi akan ditampilkan di
-                            sini.</p>
-                        <span class="text-sm text-slate-400">Hubungi administrator untuk mengunggah gambar bagan.</span>
+                        <!-- Level 2: Management -->
+                        <div class="flex flex-col md:flex-row gap-8 md:gap-32 mt-0 w-full justify-center">
+                            <!-- Kasubag TU -->
+                            <div class="flex flex-col items-center">
+                                <div
+                                    class="bg-white text-slate-700 px-6 py-3 rounded-xl shadow-md border border-slate-200 w-56 text-center hover:shadow-lg transition-shadow">
+                                    <h4 class="font-bold text-medical-blue">Kasubag Tata Usaha</h4>
+                                </div>
+                                <div class="h-6 w-0.5 bg-slate-300"></div>
+                                <div class="flex flex-col gap-2 mt-2">
+                                    <div
+                                        class="bg-slate-50 text-slate-600 px-4 py-2 rounded-lg border border-slate-100 text-sm shadow-sm w-56 text-center">
+                                        Simpus & SP2TP
+                                    </div>
+                                    <div
+                                        class="bg-slate-50 text-slate-600 px-4 py-2 rounded-lg border border-slate-100 text-sm shadow-sm w-56 text-center">
+                                        Kepegawaian
+                                    </div>
+                                    <div
+                                        class="bg-slate-50 text-slate-600 px-4 py-2 rounded-lg border border-slate-100 text-sm shadow-sm w-56 text-center">
+                                        Keuangan
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fungsional -->
+                            <div class="flex flex-col items-center">
+                                <div
+                                    class="bg-white text-slate-700 px-6 py-3 rounded-xl shadow-md border border-slate-200 w-56 text-center hover:shadow-lg transition-shadow">
+                                    <h4 class="font-bold text-medical-blue">Penanggung Jawab</h4>
+                                </div>
+                                <div class="h-6 w-0.5 bg-slate-300"></div>
+                                <div class="flex flex-col gap-2 mt-2">
+                                    <div
+                                        class="bg-teal-50 text-teal-700 px-4 py-2 rounded-lg border border-teal-100 text-sm shadow-sm w-60 text-center font-medium">
+                                        UKM Esensial & Perkesmas
+                                    </div>
+                                    <div
+                                        class="bg-teal-50 text-teal-700 px-4 py-2 rounded-lg border border-teal-100 text-sm shadow-sm w-60 text-center font-medium">
+                                        UKM Pengembangan
+                                    </div>
+                                    <div
+                                        class="bg-teal-50 text-teal-700 px-4 py-2 rounded-lg border border-teal-100 text-sm shadow-sm w-60 text-center font-medium">
+                                        UKP, Kefarmasian & Laboratorium
+                                    </div>
+                                    <div
+                                        class="bg-teal-50 text-teal-700 px-4 py-2 rounded-lg border border-teal-100 text-sm shadow-sm w-60 text-center font-medium">
+                                        Jejaring Pelayanan
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

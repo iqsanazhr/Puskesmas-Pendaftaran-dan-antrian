@@ -71,6 +71,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Right Side Navigation Links -->
                 <div class="hidden sm:flex sm:items-center sm:ml-6 space-x-4">
                     @guest
@@ -82,12 +83,8 @@
                             Daftar Antrian
                         </a>
                     @else
-                        @if(auth()->user()->role == 'patient')
-                            <a href="{{ route('patient.register') }}"
-                                class="mr-4 bg-white text-medical-blue border border-medical-blue px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-50 transition">
-                                Daftar Antrian
-                            </a>
-                        @endif
+                        <a href="{{ route('patient.dashboard') }}"
+                            class="text-slate-600 hover:text-medical-blue hover:bg-blue-50 px-3 py-2 rounded-lg text-sm font-medium transition-colors">Dashboard</a>
 
                         <!-- Profile Dropdown -->
                         <div class="ml-3 relative" x-data="{ open: false }">

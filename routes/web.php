@@ -18,12 +18,14 @@ Route::get('/', function () {
 });
 
 Route::get('/register', \App\Http\Livewire\PatientRegistration::class)->name('patient.register')->middleware('auth');
+Route::get('/queue/ticket/{id}/pdf', [\App\Http\Controllers\QueueTicketController::class, 'downloadPdf'])->name('queue.ticket.pdf')->middleware('auth');
 Route::get('/queue', \App\Http\Livewire\QueueMonitor::class)->name('queue.monitor');
 
 Route::get('/signup', \App\Http\Livewire\AuthPage::class)->name('register');
 Route::get('/login', \App\Http\Livewire\AuthPage::class)->name('login');
 Route::get('/admin', \App\Http\Livewire\AdminDashboard::class)->name('admin.dashboard')->middleware('auth');
 Route::get('/admin/messages', \App\Http\Livewire\AdminMessages::class)->name('admin.messages')->middleware('auth');
+Route::get('/dashboard', \App\Http\Livewire\PatientDashboard::class)->name('patient.dashboard')->middleware('auth');
 Route::get('/leader-dashboard', \App\Http\Livewire\LeaderDashboard::class)->name('leader.dashboard')->middleware('auth');
 
 Route::view('/profil', 'profil')->name('profil');

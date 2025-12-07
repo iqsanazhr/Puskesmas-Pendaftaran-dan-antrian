@@ -16,6 +16,7 @@ class PatientRegistration extends Component
     public $doctors = [];
     public $successMessage;
     public $queueNumber;
+    public $queueId;
 
     public function mount()
     {
@@ -66,7 +67,7 @@ class PatientRegistration extends Component
 
         $newNumber = $lastQueue ? $lastQueue + 1 : 1;
 
-        Queue::create([
+        $queue = Queue::create([
             'patient_id' => $patient->id,
             'poly_id' => $this->poly_id,
             'doctor_id' => $this->doctor_id,
@@ -75,11 +76,12 @@ class PatientRegistration extends Component
             'status' => 'waiting',
         ]);
 
-        $this->queueNumber = $newNumber;
-        $this->successMessage = "Pendaftaran Berhasil! Nomor Antrian Anda: " . $newNumber;
+        session()->flash('success', "Pendaftaran Berhasil! Nomor Antrian Anda: " . $newNumber);
+        return redirect()->route('patient.dashboard');
 
-        // Reset form except success message
-        $this->reset(['nik', 'name', 'dob', 'address', 'phone', 'gender', 'poly_id', 'doctor_id', 'date', 'doctors']);
+        // Reset form except success message and queue info
+        // Reset form logic is no longer needed due to redirect
+        // $this->reset(['nik', 'name', 'dob', 'address', 'phone', 'gender', 'poly_id', 'doctor_id', 'date', 'doctors']);
     }
 
     public function render()

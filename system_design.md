@@ -102,7 +102,8 @@ activityDiagram
     if (Kuota Tersedia?) then (Ya)
         :Generate Nomor Antrian;
         :Simpan Data Antrian;
-        :Tampilkan Tiket Antrian;
+        :Redirect ke Dashboard Pasien;
+        :Lihat Riwayat & Cetak Tiket PDF;
     else (Tidak)
         :Tampilkan Pesan Penuh;
         stop
@@ -161,8 +162,8 @@ Struktur database dan relasi antar tabel.
 
 ```mermaid
 erDiagram
-    USERS ||--o{ PATIENTS : "has one (or linked to)"
-    USERS ||--o{ DOCTORS : "has one (linked to)"
+    USERS ||--o| PATIENTS : "has one (linked to)"
+    USERS ||--o| DOCTORS : "has one (linked to)"
 
     POLIES ||--o{ DOCTORS : "has many"
     POLIES ||--o{ QUEUES : "has many"

@@ -30,7 +30,7 @@ Aplikasi ini dibangun menggunakan teknologi web modern untuk memastikan performa
 ### 4. Halaman Informasi Publik ℹ️
 
 -   **Beranda**: Overview layanan dan CTA pendaftaran.
--   **Profil**: Visi, Misi, dan Struktur Organisasi.
+-   **Profil**: Visi, Misi (Layout baru), dan Struktur Organisasi Dinamis (Tree Diagram).
 -   **Layanan**: Daftar poli dan fasilitas kesehatan.
 -   **Kontak**: Formulir pengaduan/pertanyaan dan peta lokasi.
 

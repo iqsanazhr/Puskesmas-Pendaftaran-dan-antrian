@@ -105,7 +105,7 @@
                             <label for="full-name" class="block text-sm font-medium text-slate-700">Nama Lengkap</label>
                             <input type="text" name="full-name" id="full-name" autocomplete="name"
                                 class="mt-1 block w-full border-slate-300 rounded-xl shadow-sm focus:ring-medical-blue focus:border-medical-blue sm:text-sm py-3 px-4 bg-slate-50 focus:bg-white transition"
-                                placeholder="Farrel">
+                                placeholder="Budi">
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
