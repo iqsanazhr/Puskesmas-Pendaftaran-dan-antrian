@@ -4,51 +4,29 @@ Dokumen ini berisi diagram dan tabel interaksi untuk memvisualisasikan arsitektu
 
 ---
 
-## 1. Tabel Interaksi Fitur & Role
-
-Tabel berikut menjelaskan hak akses dan fitur yang tersedia untuk setiap role pengguna:
-
-| Fitur / Role                         |  Pasien (Patient)   |  Dokter (Doctor)  |  Admin / Petugas  | Pimpinan (Leader) |
-| :----------------------------------- | :-----------------: | :---------------: | :---------------: | :---------------: |
-| **Login / Register**                 |         ✅          |        ✅         |        ✅         |        ✅         |
-| **Lihat Beranda & Info**             |         ✅          |        ✅         |        ✅         |        ✅         |
-| **Daftar Antrian**                   |         ✅          |        ❌         | ✅ (Bantu Pasien) |        ❌         |
-| **Lihat Riwayat Antrian**            | ✅ (Milik Sendiri)  |        ❌         |    ✅ (Semua)     |  ✅ (Statistik)   |
-| **Monitor Antrian (Publik)**         |         ✅          |        ✅         |        ✅         |        ✅         |
-| **Kelola Antrian (Panggil/Selesai)** |         ❌          | ✅ (Poli Terkait) |  ✅ (Semua Poli)  |        ❌         |
-| **Kelola Data Pasien**               | ✅ (Profil Sendiri) |        ❌         |        ✅         |        ❌         |
-| **Kelola Data Dokter & Poli**        |         ❌          |        ❌         |        ✅         |        ❌         |
-| **Lihat Dashboard Statistik**        |         ❌          |        ❌         |        ❌         |        ✅         |
-| **Kirim Pesan Kontak**               |         ✅          |        ❌         |        ❌         |        ❌         |
-| **Baca Pesan Kontak**                |         ❌          |        ❌         |        ✅         |        ❌         |
-
----
-
-## 2. Use Case Diagram
+## 1. Use Case Diagram
 
 Diagram ini menggambarkan interaksi aktor dengan fitur-fitur utama sistem.
 
 ```mermaid
-usecaseDiagram
-    actor "Pasien" as P
-    actor "Dokter" as D
-    actor "Admin" as A
-    actor "Pimpinan" as L
+graph LR
+    P[Pasien]
+    D[Dokter]
+    A[Admin]
+    L[Pimpinan]
 
-    package "Sistem Puskesmas" {
-        usecase "Login / Register" as UC1
-        usecase "Melihat Informasi (Layanan, Jadwal)" as UC2
-        usecase "Daftar Antrian Online" as UC3
-        usecase "Monitor Antrian Real-time" as UC4
-        usecase "Mengelola Profil Diri" as UC5
-
-        usecase "Memanggil Pasien (Kelola Antrian)" as UC6
-        usecase "Mengelola Data Pasien" as UC7
-        usecase "Mengelola Data Dokter/Poli" as UC8
-        usecase "Melihat Pesan Masuk" as UC9
-
-        usecase "Melihat Dashboard Statistik" as UC10
-    }
+    subgraph "Sistem Puskesmas"
+        UC1(Login / Register)
+        UC2(Melihat Informasi Layanan & Jadwal)
+        UC3(Daftar Antrian Online)
+        UC4(Monitor Antrian Real-time)
+        UC5(Mengelola Profil Diri)
+        UC6(Memanggil Pasien / Kelola Antrian)
+        UC7(Mengelola Data Pasien)
+        UC8(Mengelola Data Dokter & Poli)
+        UC9(Melihat Pesan Masuk)
+        UC10(Melihat Dashboard Statistik)
+    end
 
     P --> UC1
     P --> UC2
@@ -65,7 +43,7 @@ usecaseDiagram
     A --> UC7
     A --> UC8
     A --> UC9
-    A --> UC3 : "Bantu Daftar"
+    A --> UC3
 
     L --> UC1
     L --> UC10
@@ -73,97 +51,74 @@ usecaseDiagram
 
 ---
 
-## 3. Activity Diagram: Pendaftaran Antrian Pasien
+## 2. Activity Diagram: Pendaftaran Antrian Pasien
 
 Alur proses pasien mendaftar antrian hingga mendapatkan nomor.
 
 ```mermaid
-activityDiagram
-    participant Pasien
-    participant Sistem
-    participant Database
+flowchart TD
+    Start((Mulai)) --> Login{Sudah Punya Akun?}
+    Login -- Ya --> FormLogin[Form Login]
+    Login -- Tidak --> FormDaftar[Form Daftar]
+    FormLogin --> Dashboard
+    FormDaftar --> Dashboard
 
-    start
-    :Pasien Login;
-    if (Sudah Punya Akun?) then (Ya)
-        :Masuk ke Halaman Login;
-        :Input Email & Password;
-    else (Tidak)
-        :Masuk ke Halaman Daftar;
-        :Input Data Diri & NIK;
-        :Simpan Data Akun;
-    endif
+    Dashboard --> MenuDaftar[Menu Daftar Antrian]
+    MenuDaftar --> PilihPoli[Pilih Poli]
+    PilihPoli --> CekKuota{Kuota Tersedia?}
 
-    :Akses Menu "Daftar Antrian";
-    :Pilih Poli Tujuan;
-    :Pilih Dokter (Opsional);
+    CekKuota -- Ya --> Generate[Generate No Antrian]
+    Generate --> SimpanDB[(Simpan Database)]
+    SimpanDB --> Redirect[Redirect ke Dashboard Pasien]
+    Redirect --> LihatTiket[Lihat Riwayat & Cetak Tiket PDF]
+    LihatTiket --> Selesai((Selesai))
 
-    :Sistem Cek Jadwal & Kuota;
-    if (Kuota Tersedia?) then (Ya)
-        :Generate Nomor Antrian;
-        :Simpan Data Antrian;
-        :Redirect ke Dashboard Pasien;
-        :Lihat Riwayat & Cetak Tiket PDF;
-    else (Tidak)
-        :Tampilkan Pesan Penuh;
-        stop
-    endif
-
-    :Pasien Menunggu (Pantau Monitor);
-    stop
+    CekKuota -- Tidak --> Penuh[Tampilkan Pesan Penuh]
+    Penuh --> Selesai
 ```
 
 ---
 
-## 4. Activity Diagram: Proses Pelayanan (Admin/Dokter)
+## 3. Activity Diagram: Proses Pelayanan (Admin/Dokter)
 
 Alur proses pemanggilan pasien oleh petugas medis.
 
 ```mermaid
-activityDiagram
-    participant Dokter_Admin
-    participant Sistem
+flowchart TD
+    Start((Mulai)) --> Login[Login Petugas/Dokter]
+    Login --> Dashboard[Dashboard Antrian]
+    Dashboard --> PilihPoli[Pilih Poli]
+    PilihPoli --> CekPasien{Ada Pasien?}
 
-    start
-    :Login sebagai Dokter/Admin;
-    :Buka Dashboard Antrian;
-    :Pilih Poli;
+    CekPasien -- Ya --> Panggil[Klik Panggil]
+    Panggil --> StatusCalled[Status: Called]
+    StatusCalled --> Notif[Bunyikan Notifikasi]
+    Notif --> Periksa[Periksa Pasien]
 
-    repeat
-        :Lihat Daftar Pasien Waiting;
-        if (Ada Pasien Menunggu?) then (Ya)
-            :Klik "Panggil Pasien";
-            :Sistem Update Status -> "Called";
-            :Bunyikan Notifikasi Panggilan;
+    Periksa --> Hadir{Pasien Hadir?}
+    Hadir -- Ya --> Layani[Layanan Medis]
+    Layani --> SelesaiLayanan[Klik Selesai]
+    SelesaiLayanan --> StatusCompleted[Status: Completed]
+    StatusCompleted --> CekPasien
 
-            :Periksa Pasien;
+    Hadir -- Tidak --> Lewati[Klik Lewati]
+    Lewati --> StatusSkipped[Status: Skipped]
+    StatusSkipped --> CekPasien
 
-            if (Pasien Hadir?) then (Ya)
-                :Lakukan Pelayanan;
-                :Klik "Selesai";
-                :Sistem Update Status -> "Completed";
-            else (Tidak)
-                :Klik "Lewati";
-                :Sistem Update Status -> "Skipped";
-            endif
-        else (Tidak)
-            :Tunggu Pasien Baru;
-        endif
-    repeat while (Jam Operasional Masih Ada)
-
-    stop
+    CekPasien -- Tidak --> Tunggu[Standby / Tunggu Pasien]
+    Tunggu --> CekPasien
 ```
 
 ---
 
-## 5. Entity Relationship Diagram (ERD)
+## 4. Entity Relationship Diagram (ERD)
 
 Struktur database dan relasi antar tabel.
 
 ```mermaid
 erDiagram
-    USERS ||--o| PATIENTS : "has one (linked to)"
-    USERS ||--o| DOCTORS : "has one (linked to)"
+    USERS ||--o| PATIENTS : "has one"
+    USERS ||--o| DOCTORS : "has one"
 
     POLIES ||--o{ DOCTORS : "has many"
     POLIES ||--o{ QUEUES : "has many"
@@ -225,7 +180,7 @@ erDiagram
 
 ---
 
-## 6. Class Diagram
+## 5. Class Diagram
 
 Struktur kelas utama (Model & Livewire Component) dalam aplikasi.
 
@@ -245,6 +200,7 @@ classDiagram
         +user_id: int
         +nik: string
         +queues(): HasMany
+        +user(): BelongsTo
     }
 
     class Doctor {
@@ -253,6 +209,7 @@ classDiagram
         +poly_id: int
         +poly(): BelongsTo
         +queues(): HasMany
+        +user(): BelongsTo
     }
 
     class Poly {
@@ -271,30 +228,17 @@ classDiagram
         +poly(): BelongsTo
     }
 
-    class AuthPage {
-        +loginEmail: string
-        +registerName: string
-        +login()
-        +register()
-        +toggleMode()
-    }
-
     class PatientRegistration {
-        +selectedPoly: int
-        +selectedDoctor: int
-        +registerQueue()
+        +submit()
     }
 
-    class QueueMonitor {
+    class PatientDashboard {
         +queues: Collection
-        +poll()
+        +render()
     }
 
-    class AdminDashboard {
-        +polyId: int
-        +callPatient()
-        +markAsCompleted()
-        +skipPatient()
+    class QueueTicketController {
+        +downloadPdf()
     }
 
     User "1" -- "0..1" Patient
@@ -303,8 +247,4 @@ classDiagram
     Patient "1" -- "*" Queue
     Poly "1" -- "*" Doctor
     Poly "1" -- "*" Queue
-
-    AuthPage ..> User : Creates/Authenticates
-    PatientRegistration ..> Queue : Creates
-    AdminDashboard ..> Queue : Updates
 ```
