@@ -10,6 +10,46 @@ class PatientDashboard extends Component
 {
     use WithPagination;
 
+    public $isEditing = false;
+    public $address;
+    public $phone;
+
+    public function mount()
+    {
+        if (auth()->check() && auth()->user()->patient) {
+            $this->address = auth()->user()->patient->address;
+            $this->phone = auth()->user()->patient->phone;
+        }
+    }
+
+    public function toggleEdit()
+    {
+        $this->isEditing = !$this->isEditing;
+        if (!$this->isEditing && auth()->user()->patient) {
+            // Reset to saved data if cancelling
+            $this->address = auth()->user()->patient->address;
+            $this->phone = auth()->user()->patient->phone;
+        }
+    }
+
+    public function updateProfile()
+    {
+        $this->validate([
+            'address' => 'required|string|max:500',
+            'phone' => 'required|string|max:15',
+        ]);
+
+        if (auth()->user()->patient) {
+            auth()->user()->patient->update([
+                'address' => $this->address,
+                'phone' => $this->phone,
+            ]);
+
+            $this->isEditing = false;
+            session()->flash('success', 'Profil berhasil diperbarui!');
+        }
+    }
+
     public function render()
     {
         $queues = collect();

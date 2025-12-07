@@ -38,23 +38,79 @@
                         <p class="text-blue-100">{{ auth()->user()->email }}</p>
                     </div>
                     <div class="px-6 py-6 space-y-4">
+                        <!-- Alert Success -->
+                        @if (session()->has('success'))
+                            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+                                role="alert">
+                                <span class="block sm:inline">{{ session('success') }}</span>
+                            </div>
+                        @endif
+
                         <div>
                             <span class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">NIK</span>
                             <span
                                 class="block text-slate-700 font-medium">{{ auth()->user()->patient->nik ?? '-' }}</span>
                         </div>
-                        <div>
-                            <span class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">No.
-                                Telepon</span>
-                            <span
-                                class="block text-slate-700 font-medium">{{ auth()->user()->patient->phone ?? '-' }}</span>
-                        </div>
-                        <div>
-                            <span
-                                class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Alamat</span>
-                            <span
-                                class="block text-slate-700 font-medium">{{ auth()->user()->patient->address ?? '-' }}</span>
-                        </div>
+
+                        @if($isEditing)
+                            <!-- Edit Mode -->
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="phone"
+                                        class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">No.
+                                        Telepon</label>
+                                    <input wire:model="phone" type="text" id="phone"
+                                        class="w-full rounded-lg border-slate-300 shadow-sm focus:border-medical-blue focus:ring focus:ring-medical-blue focus:ring-opacity-50 text-sm">
+                                    @error('phone') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                </div>
+                                <div>
+                                    <label for="address"
+                                        class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Alamat</label>
+                                    <textarea wire:model="address" id="address" rows="3"
+                                        class="w-full rounded-lg border-slate-300 shadow-sm focus:border-medical-blue focus:ring focus:ring-medical-blue focus:ring-opacity-50 text-sm"></textarea>
+                                    @error('address') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="flex gap-2 pt-2">
+                                    <button wire:click="updateProfile"
+                                        class="flex-1 bg-medical-blue text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">Simpan</button>
+                                    <button wire:click="toggleEdit"
+                                        class="flex-1 bg-slate-200 text-slate-700 px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-300 transition">Batal</button>
+                                </div>
+                            </div>
+                        @else
+                            <!-- View Mode -->
+                        @if($isEditing)
+                            <!-- Edit Mode -->
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="phone" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">No. Telepon</label>
+                                    <input wire:model="phone" type="text" id="phone" class="w-full rounded-lg border-slate-300 shadow-sm focus:border-medical-blue focus:ring focus:ring-medical-blue focus:ring-opacity-50 text-sm">
+                                    @error('phone') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                </div>
+                                <div>
+                                    <label for="address" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Alamat</label>
+                                    <textarea wire:model="address" id="address" rows="3" class="w-full rounded-lg border-slate-300 shadow-sm focus:border-medical-blue focus:ring focus:ring-medical-blue focus:ring-opacity-50 text-sm"></textarea>
+                                    @error('address') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="flex gap-2 pt-2">
+                                    <button wire:click="updateProfile" class="flex-1 bg-medical-blue text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">Simpan</button>
+                                    <button wire:click="toggleEdit" class="flex-1 bg-slate-200 text-slate-700 px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-300 transition">Batal</button>
+                                </div>
+                            </div>
+                        @else
+                            <!-- View Mode -->
+                            <div>
+                                <span class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">No. Telepon</span>
+                                <span class="block text-slate-700 font-medium">{{ auth()->user()->patient->phone ?? '-' }}</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Alamat</span>
+                                <span class="block text-slate-700 font-medium">{{ auth()->user()->patient->address ?? '-' }}</span>
+                            </div>
+                            <div class="pt-2">
+                                <button wire:click="toggleEdit" class="text-medical-blue text-sm font-bold hover:underline">Ubah Data</button>
+                            </div>
+                        @endif
                         <div class="pt-4 border-t border-slate-100">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

@@ -1,6 +1,10 @@
-# Dokumentasi Desain Sistem Puskesmas Ajibarang
-
 Dokumen ini berisi diagram dan tabel interaksi untuk memvisualisasikan arsitektur, alur kerja, dan struktur data dari Sistem Informasi Puskesmas Ajibarang.
+
+**Catatan Hak Akses**:
+
+-   **Admin**: Hanya bertugas memanggil antrian dan menampung masukan dari pasien dan dokter. Tidak memiliki akses untuk mengelola data pasien, data dokter, atau melakukan pendaftaran pasien.
+-   **Dokter**: Hanya dapat memanggil antrian di poli yang ditugaskan.
+-   **Pasien**: Mendaftar mandiri dan memantau antrian.
 
 ---
 
@@ -26,6 +30,7 @@ graph LR
         UC8(Mengelola Data Dokter & Poli)
         UC9(Melihat Pesan Masuk)
         UC10(Melihat Dashboard Statistik)
+        UC11(Memberikan Masukan / Kontak)
     end
 
     P --> UC1
@@ -33,10 +38,12 @@ graph LR
     P --> UC3
     P --> UC4
     P --> UC5
+    P --> UC11
 
     D --> UC1
     D --> UC6
     D --> UC4
+    D --> UC11
 
     A --> UC1
     A --> UC6

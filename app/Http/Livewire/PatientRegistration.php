@@ -47,7 +47,24 @@ class PatientRegistration extends Component
     {
         $this->validate();
 
-        // Find or Create Patient
+        // Check Daily Quota (Max 25 Per Poly)
+        $todayCount = Queue::where('poly_id', $this->poly_id)
+            ->where('date', $this->date)
+            ->count();
+
+        if ($todayCount >= 25) {
+            $this->addError('date', 'Kuota antrian untuk poli ini sudah penuh (Maksimal 25 pasien/hari). Silakan pilih tanggal lain.');
+            return;
+        }
+
+        // Generate Queue Number
+        $lastQueue = Queue::where('poly_id', $this->poly_id)
+            ->where('date', $this->date)
+            ->max('number');
+
+        $newNumber = $lastQueue ? $lastQueue + 1 : 1;
+
+        // Create Patient (if not exists) and Queue
         $patient = Patient::updateOrCreate(
             ['nik' => $this->nik],
             [
@@ -59,13 +76,6 @@ class PatientRegistration extends Component
                 'user_id' => auth()->id(),
             ]
         );
-
-        // Generate Queue Number
-        $lastQueue = Queue::where('poly_id', $this->poly_id)
-            ->where('date', $this->date)
-            ->max('number');
-
-        $newNumber = $lastQueue ? $lastQueue + 1 : 1;
 
         $queue = Queue::create([
             'patient_id' => $patient->id,

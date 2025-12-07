@@ -18,17 +18,22 @@ class AdminDashboard extends Component
             return redirect('/');
         }
 
-        // If doctor, auto select poly
+        // If doctor, auto select poly AND restrict switching
         if (auth()->user()->role == 'doctor') {
             $doctor = \App\Models\Doctor::where('user_id', auth()->id())->first();
             if ($doctor) {
                 $this->selectedPolyId = $doctor->poly_id;
+            } else {
+                session()->flash('error', 'Anda belum terdaftar di poli manapun.');
+                return redirect('/');
             }
         }
     }
 
     public function callNext()
     {
+        $this->ensureDoctorAccess();
+
         if (!$this->selectedPolyId)
             return;
 
@@ -42,6 +47,7 @@ class AdminDashboard extends Component
         if ($next) {
             // Mark current as completed if exists
             if ($this->currentQueue) {
+                // Default behavior: if calling next without explicit action, mark current as completed
                 $this->currentQueue->update(['status' => 'completed']);
             }
 
@@ -52,15 +58,41 @@ class AdminDashboard extends Component
 
     public function completeCurrent()
     {
+        $this->ensureDoctorAccess();
         if ($this->currentQueue) {
             $this->currentQueue->update(['status' => 'completed']);
             $this->currentQueue = null;
         }
     }
 
+    public function skipCurrent()
+    {
+        $this->ensureDoctorAccess();
+        if ($this->currentQueue) {
+            $this->currentQueue->update(['status' => 'skipped']);
+            $this->currentQueue = null;
+        }
+    }
+
+    protected function ensureDoctorAccess()
+    {
+        if (auth()->user()->role == 'doctor') {
+            $doctor = \App\Models\Doctor::where('user_id', auth()->id())->first();
+            if ($doctor && $this->selectedPolyId != $doctor->poly_id) {
+                // Force reset to assigned poly
+                $this->selectedPolyId = $doctor->poly_id;
+            }
+        }
+    }
+
     public function render()
     {
-        $polies = Poly::all();
+        // If doctor, only show their poly query
+        if (auth()->user()->role == 'doctor') {
+            $polies = Poly::where('id', $this->selectedPolyId)->get();
+        } else {
+            $polies = Poly::all();
+        }
 
         $waitingQueues = [];
         if ($this->selectedPolyId) {
