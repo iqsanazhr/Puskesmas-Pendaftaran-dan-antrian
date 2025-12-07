@@ -142,14 +142,9 @@ Jika Anda menjalankan `db:seed`, Anda bisa menggunakan akun berikut untuk testin
     -   Email: `pasien@example.com`
     -   Password: `password`
 
-## 🤝 Kontribusi
-
-Kontribusi selalu diterima! Silakan fork repository ini, buat branch fitur baru, dan kirim Pull Request.
-
 ## 📄 Lisensi
 
 Project ini dilisensikan di bawah [MIT License](https://opensource.org/licenses/MIT).
 
 ---
 
-**Dibuat dengan ❤️ untuk Kesehatan Masyarakat Ajibarang**
