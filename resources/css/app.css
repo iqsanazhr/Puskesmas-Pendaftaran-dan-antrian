@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@theme {
+  --color-medical-blue: #0056b3;
+  --color-medical-teal: #00a8cc;
+  --color-medical-light: #f0f8ff;
+  --font-sans: 'Inter', sans-serif;
+}
