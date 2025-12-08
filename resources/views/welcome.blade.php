@@ -29,7 +29,7 @@
                             <div class="mt-8 sm:mt-10 sm:flex sm:justify-center lg:justify-start gap-3">
                                 <div class="rounded-full shadow-lg shadow-blue-500/30">
                                     <a href="{{ route('patient.register') }}"
-                                        class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-bold rounded-full text-white bg-medical-blue hover:bg-blue-700 md:py-4 md:text-lg md:px-10 transition transform hover:-translate-y-1">
+                                        class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-bold rounded-full text-white bg-linear-to-r from-medical-blue to-teal-500 hover:shadow-lg hover:shadow-blue-500/50 md:py-4 md:text-lg md:px-10 transition transform hover:-translate-y-1">
                                         Ambil Antrian
                                     </a>
                                 </div>
@@ -182,7 +182,7 @@
                 <p class="mt-4 text-lg text-slate-500">Jangan tunda kesehatan Anda. Daftar antrian sekarang secara online.</p>
                 <div class="mt-8">
                     <a href="{{ route('patient.register') }}"
-                        class="inline-flex items-center justify-center px-10 py-4 border border-transparent text-lg font-bold rounded-full text-white bg-medical-blue hover:bg-blue-700 shadow-xl shadow-blue-500/30 transition transform hover:-translate-y-1">
+                        class="inline-flex items-center justify-center px-10 py-4 border border-transparent text-lg font-bold rounded-full text-white bg-linear-to-r from-medical-blue to-teal-500 hover:shadow-lg hover:shadow-blue-500/50 shadow-xl shadow-blue-500/30 transition transform hover:-translate-y-1">
                         Daftar Sekarang
                     </a>
                 </div>

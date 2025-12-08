@@ -1,3 +1,9 @@
+@php
+    /** @var \App\Models\Poly[] $polies */
+    /** @var int|null $selectedPolyId */
+    /** @var \App\Models\Queue|null $currentQueue */
+    /** @var \App\Models\Queue[] $waitingQueues */
+@endphp
 <div class="py-12 bg-slate-50 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-2xl border border-slate-100">
@@ -7,7 +13,7 @@
                         <h2 class="text-3xl font-bold text-slate-900">Dashboard Antrian</h2>
                         <p class="text-slate-500 mt-1">Kelola antrian pasien dengan mudah dan efisien.</p>
                     </div>
-                    @if(auth()->user()->role == 'admin')
+                    @if(auth()->user()?->role == 'admin')
                         <div class="w-full md:w-72">
                             <label for="poly-select" class="block text-sm font-medium text-slate-700 mb-1">Pilih
                                 Poli</label>
@@ -26,7 +32,7 @@
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
                         <!-- Current Queue Section -->
                         <div
-                            class="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl border border-blue-100 shadow-sm flex flex-col items-center justify-center text-center relative overflow-hidden">
+                            class="bg-linear-to-br from-blue-50 to-white p-8 rounded-2xl border border-blue-100 shadow-sm flex flex-col items-center justify-center text-center relative overflow-hidden">
                             <div
                                 class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-blue-100 rounded-full opacity-50 blur-xl">
                             </div>
@@ -48,7 +54,7 @@
 
                                     <div class="flex flex-col sm:flex-row justify-center gap-4">
                                         <button wire:click="completeCurrent"
-                                            class="group bg-green-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-600 transition-all duration-200 shadow-lg shadow-green-500/30 flex items-center justify-center gap-2 transform hover:-translate-y-1">
+                                            class="group bg-linear-to-r from-emerald-500 to-green-600 text-white px-6 py-3 rounded-full font-bold hover:shadow-lg hover:shadow-green-500/30 transition-all duration-200 flex items-center justify-center gap-2 transform hover:-translate-y-1">
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                 class="h-5 w-5 group-hover:scale-110 transition-transform" viewBox="0 0 20 20"
                                                 fill="currentColor">
@@ -60,7 +66,7 @@
                                         </button>
 
                                         <button wire:click="skipCurrent"
-                                            class="group bg-slate-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-slate-600 transition-all duration-200 shadow-lg shadow-slate-500/30 flex items-center justify-center gap-2 transform hover:-translate-y-1">
+                                            class="group bg-linear-to-r from-slate-500 to-slate-600 text-white px-6 py-3 rounded-full font-bold hover:shadow-lg hover:shadow-slate-500/30 transition-all duration-200 flex items-center justify-center gap-2 transform hover:-translate-y-1">
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                 class="h-5 w-5 group-hover:scale-110 transition-transform" viewBox="0 0 20 20"
                                                 fill="currentColor">
@@ -96,7 +102,7 @@
                                     Antrian Menunggu
                                 </h3>
                                 <button wire:click="callNext"
-                                    class="bg-medical-blue text-white px-5 py-2.5 rounded-lg font-medium hover:bg-blue-700 transition shadow-md shadow-blue-500/20 flex items-center gap-2">
+                                    class="bg-linear-to-r from-medical-blue to-teal-500 text-white px-5 py-2.5 rounded-lg font-bold hover:shadow-lg hover:shadow-blue-500/30 transition flex items-center gap-2 transform hover:-translate-y-0.5">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                         fill="currentColor">
                                         <path fill-rule="evenodd"
@@ -107,7 +113,7 @@
                                 </button>
                             </div>
 
-                            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden flex-grow shadow-sm">
+                            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden grow shadow-sm">
                                 <div class="overflow-y-auto max-h-[400px]">
                                     <ul class="divide-y divide-slate-100">
                                         @forelse($waitingQueues as $queue)

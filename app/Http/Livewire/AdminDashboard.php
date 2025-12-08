@@ -14,12 +14,15 @@ class AdminDashboard extends Component
 
     public function mount()
     {
-        if (!in_array(auth()->user()->role, ['admin', 'doctor'])) {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+
+        if (!in_array($user->role, ['admin', 'doctor'])) {
             return redirect('/');
         }
 
         // If doctor, auto select poly AND restrict switching
-        if (auth()->user()->role == 'doctor') {
+        if ($user->role == 'doctor') {
             $doctor = \App\Models\Doctor::where('user_id', auth()->id())->first();
             if ($doctor) {
                 $this->selectedPolyId = $doctor->poly_id;
@@ -109,11 +112,12 @@ class AdminDashboard extends Component
                 ->first();
         }
 
-        return view('livewire.admin-dashboard', [
+        /** @var \Illuminate\View\View $view */
+        $view = view('livewire.admin-dashboard', [
             'polies' => $polies,
             'waitingQueues' => $waitingQueues
-        ])
-            ->extends('layouts.app')
-            ->section('content');
+        ]);
+
+        return $view->extends('layouts.app')->section('content');
     }
 }

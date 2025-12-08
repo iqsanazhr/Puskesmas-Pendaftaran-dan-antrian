@@ -7,7 +7,6 @@ use App\Models\Poly;
 use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Queue;
-use Carbon\Carbon;
 
 class PatientRegistration extends Component
 {
@@ -21,17 +20,32 @@ class PatientRegistration extends Component
     public function mount()
     {
         if (auth()->check()) {
-            $this->name = auth()->user()->name;
+            /** @var \App\Models\User $user */
+            $user = auth()->user();
+
+            $this->name = $user->name;
+            $this->nik = $user->nik; // Auto-fill NIK from User account
+
+            // Auto-fill locked fields from Patient Profile
+            if ($user->patient) {
+                $this->dob = $user->patient->dob;
+                $this->gender = $user->patient->gender;
+
+                // If patient profile exists, we might want to auto-fill address/phone too, 
+                // but user only asked to lock dob/gender/name/nik.
+                // Let's pre-fill them if empty for convenience, but only lock the requested ones.
+                if (empty($this->address))
+                    $this->address = $user->patient->address;
+                if (empty($this->phone))
+                    $this->phone = $user->patient->phone;
+            }
         }
     }
 
     protected $rules = [
-        'nik' => 'required|numeric|digits:16',
-        'name' => 'required|string|max:255',
-        'dob' => 'required|date',
+        // 'nik', 'name', 'dob', 'gender' are readonly/enforced
         'address' => 'required|string',
         'phone' => 'nullable|string|max:15',
-        'gender' => 'required|in:L,P',
         'poly_id' => 'required|exists:polies,id',
         'doctor_id' => 'required|exists:doctors,id',
         'date' => 'required|date|after_or_equal:today',
@@ -45,6 +59,15 @@ class PatientRegistration extends Component
 
     public function submit()
     {
+        // Enforce Locked Fields from authenticated user profile (Security Fix)
+        $this->nik = auth()->user()->nik;
+        $this->name = auth()->user()->name;
+
+        if (auth()->user()->patient) {
+            $this->dob = auth()->user()->patient->dob;
+            $this->gender = auth()->user()->patient->gender;
+        }
+
         $this->validate();
 
         // Check Daily Quota (Max 25 Per Poly)
@@ -63,6 +86,9 @@ class PatientRegistration extends Component
             ->max('number');
 
         $newNumber = $lastQueue ? $lastQueue + 1 : 1;
+
+        // No need for "hijack" check anymore because we force using auth()->user()->nik
+
 
         // Create Patient (if not exists) and Queue
         $patient = Patient::updateOrCreate(
@@ -96,10 +122,11 @@ class PatientRegistration extends Component
 
     public function render()
     {
-        return view('livewire.patient-registration', [
+        /** @var \Illuminate\View\View $view */
+        $view = view('livewire.patient-registration', [
             'polies' => Poly::all(),
-        ])
-            ->extends('layouts.app')
-            ->section('content');
+        ]);
+
+        return $view->extends('layouts.app')->section('content');
     }
 }

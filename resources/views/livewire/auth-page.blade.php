@@ -78,7 +78,7 @@
                     </div>
 
                     <button type="submit"
-                        class="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg shadow-blue-500/30 text-sm font-bold text-white bg-linear-to-r from-medical-blue to-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-medical-blue transition transform hover:-translate-y-0.5">
+                        class="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg shadow-blue-500/30 text-sm font-bold text-white bg-linear-to-r from-medical-blue to-teal-500 hover:shadow-blue-500/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-medical-blue transition transform hover:-translate-y-0.5">
                         Masuk Sekarang
                     </button>
                 </form>
@@ -110,6 +110,27 @@
                         </div>
                     </div>
 
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Tanggal Lahir</label>
+                            <input wire:model.defer="registerDob" type="date" required
+                                class="block w-full px-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-medical-blue/20 focus:border-medical-blue transition sm:text-sm text-slate-600">
+                            @error('registerDob') <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Jenis Kelamin</label>
+                            <select wire:model.defer="registerGender" required
+                                class="block w-full px-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-medical-blue/20 focus:border-medical-blue transition sm:text-sm text-slate-600">
+                                <option value="">Pilih...</option>
+                                <option value="L">Laki-laki</option>
+                                <option value="P">Perempuan</option>
+                            </select>
+                            @error('registerGender') <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
                     <div>
                         <label class="block text-sm font-medium text-slate-700 mb-1">Email</label>
                         <input wire:model.defer="registerEmail" type="email" required
@@ -137,7 +158,7 @@
                     </div>
 
                     <button type="submit"
-                        class="w-full mt-2 flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg shadow-teal-500/30 text-sm font-bold text-white bg-linear-to-r from-teal-500 to-emerald-500 hover:to-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition transform hover:-translate-y-0.5">
+                        class="w-full mt-2 flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg shadow-blue-500/30 text-sm font-bold text-white bg-linear-to-r from-medical-blue to-teal-500 hover:shadow-blue-500/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-medical-blue transition transform hover:-translate-y-0.5">
                         Daftar Sekarang
                     </button>
                 </form>

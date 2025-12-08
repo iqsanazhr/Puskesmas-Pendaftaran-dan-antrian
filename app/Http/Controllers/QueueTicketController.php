@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Queue;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 
 class QueueTicketController extends Controller
@@ -29,7 +28,7 @@ class QueueTicketController extends Controller
         ];
 
         // Load View and Generate PDF
-        $pdf = PDF::loadView('pdf.queue-ticket', $data);
+        $pdf = Pdf::loadView('pdf.queue-ticket', $data);
 
         // Set paper size (Thermal Printer Size example: 80mm width, dynamic height or fixed A6/A5)
         // Let's use A6 for a ticket-like size or custom array(0, 0, 226.77, 400) ~ 80mm width

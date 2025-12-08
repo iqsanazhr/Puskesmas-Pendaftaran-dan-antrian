@@ -16,9 +16,12 @@ class PatientDashboard extends Component
 
     public function mount()
     {
-        if (auth()->check() && auth()->user()->patient) {
-            $this->address = auth()->user()->patient->address;
-            $this->phone = auth()->user()->patient->phone;
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+
+        if (auth()->check() && $user->patient) {
+            $this->address = $user->patient->address;
+            $this->phone = $user->patient->phone;
         }
     }
 
@@ -64,8 +67,11 @@ class PatientDashboard extends Component
                 ->paginate(10);
         }
 
-        return view('livewire.patient-dashboard', [
+        /** @var \Illuminate\View\View $view */
+        $view = view('livewire.patient-dashboard', [
             'queues' => $queues
-        ])->extends('layouts.app')->section('content');
+        ]);
+
+        return $view->extends('layouts.app')->section('content');
     }
 }

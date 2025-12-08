@@ -52,10 +52,12 @@
                                     Kontak
                                 </a>
                             @endif
-                            <a href="{{ route('queue.monitor') }}"
-                                class="border-transparent text-slate-500 hover:border-medical-blue hover:text-medical-blue inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                                Monitor Antrian
-                            </a>
+                            @if(!auth()->check() || auth()->user()->role !== 'doctor')
+                                <a href="{{ route('queue.monitor') }}"
+                                    class="border-transparent text-slate-500 hover:border-medical-blue hover:text-medical-blue inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                                    Monitor Antrian
+                                </a>
+                            @endif
                             @if(auth()->check() && auth()->user()->role == 'admin')
                                 <a href="{{ route('admin.messages') }}"
                                     class="border-transparent text-slate-500 hover:border-medical-blue hover:text-medical-blue inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
@@ -79,12 +81,20 @@
                             Masuk
                         </a>
                         <a href="{{ route('patient.register') }}"
-                            class="bg-medical-blue text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition shadow-lg shadow-blue-500/30">
+                            class="bg-linear-to-r from-medical-blue to-teal-500 text-white px-4 py-2 rounded-full text-sm font-bold hover:shadow-lg hover:shadow-blue-500/50 transform hover:-translate-y-0.5 transition-all duration-200 shadow-md shadow-blue-500/30">
                             Daftar Antrian
                         </a>
                     @else
-                        <a href="{{ route('patient.dashboard') }}"
-                            class="text-slate-600 hover:text-medical-blue hover:bg-blue-50 px-3 py-2 rounded-lg text-sm font-medium transition-colors">Dashboard</a>
+                        @if(auth()->user()->role == 'admin' || auth()->user()->role == 'doctor')
+                            <a href="{{ route('admin.dashboard') }}"
+                                class="text-slate-600 hover:text-medical-blue hover:bg-blue-50 px-3 py-2 rounded-lg text-sm font-medium transition-colors">Dashboard</a>
+                        @elseif(auth()->user()->role == 'leader')
+                            <a href="{{ route('leader.dashboard') }}"
+                                class="text-slate-600 hover:text-medical-blue hover:bg-blue-50 px-3 py-2 rounded-lg text-sm font-medium transition-colors">Dashboard</a>
+                        @else
+                            <a href="{{ route('patient.dashboard') }}"
+                                class="text-slate-600 hover:text-medical-blue hover:bg-blue-50 px-3 py-2 rounded-lg text-sm font-medium transition-colors">Dashboard</a>
+                        @endif
 
                         <!-- Profile Dropdown -->
                         <div class="ml-3 relative" x-data="{ open: false }">

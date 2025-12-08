@@ -26,7 +26,7 @@
             <div
                 class="relative -mt-16 lg:-mt-24 bg-white rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2">
                 <!-- Contact Info Side (Solid Blue) -->
-                <div class="relative bg-medical-blue p-10 lg:p-16 text-white overflow-hidden">
+                <div class="relative bg-linear-to-br from-medical-blue to-teal-500 p-10 lg:p-16 text-white overflow-hidden">
                     <!-- Decorative Circles (Subtle) -->
                     <div class="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-white opacity-10 rounded-full blur-2xl">
                     </div>
@@ -129,7 +129,7 @@
                         </div>
                         <div>
                             <button type="submit"
-                                class="w-full flex justify-center py-4 px-6 border border-transparent rounded-xl shadow-lg text-base font-bold text-white bg-medical-blue hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-medical-blue transform transition hover:-translate-y-1">
+                                class="w-full flex justify-center py-4 px-6 border border-transparent rounded-xl shadow-lg shadow-blue-500/30 text-base font-bold text-white bg-linear-to-r from-medical-blue to-teal-500 hover:shadow-blue-500/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-medical-blue transform transition hover:-translate-y-1">
                                 Kirim Pesan
                             </button>
                         </div>

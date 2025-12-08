@@ -13,7 +13,7 @@
             </div>
             <div class="mt-4 flex md:ml-4 md:mt-0">
                 <a href="{{ route('patient.register') }}"
-                    class="inline-flex items-center rounded-xl bg-medical-blue px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-transform hover:-translate-y-0.5">
+                    class="inline-flex items-center rounded-xl bg-linear-to-r from-medical-blue to-teal-500 px-4 py-2 text-sm font-bold text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:from-blue-600 hover:to-teal-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 hover:-translate-y-0.5">
                     <svg class="-ml-1 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -56,6 +56,20 @@
                             <!-- Edit Mode -->
                             <div class="space-y-4">
                                 <div>
+                                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
+                                        Tanggal Lahir & Jenis Kelamin
+                                    </label>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <input type="text" value="{{ auth()->user()->patient->dob ?? '-' }}" disabled
+                                            class="w-full rounded-lg border-slate-200 bg-slate-100 text-slate-500 shadow-sm text-sm cursor-not-allowed">
+                                        <input type="text"
+                                            value="{{ auth()->user()->patient->gender == 'L' ? 'Laki-laki' : (auth()->user()->patient->gender == 'P' ? 'Perempuan' : '-') }}"
+                                            disabled
+                                            class="w-full rounded-lg border-slate-200 bg-slate-100 text-slate-500 shadow-sm text-sm cursor-not-allowed">
+                                    </div>
+                                    <p class="text-[10px] text-slate-400 mt-1">*Data ini tidak dapat diubah</p>
+                                </div>
+                                <div>
                                     <label for="phone"
                                         class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">No.
                                         Telepon</label>
@@ -72,43 +86,46 @@
                                 </div>
                                 <div class="flex gap-2 pt-2">
                                     <button wire:click="updateProfile"
-                                        class="flex-1 bg-medical-blue text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">Simpan</button>
+                                        class="flex-1 bg-linear-to-r from-medical-blue to-teal-500 text-white px-3 py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-blue-500/30 transition shadow-md">Simpan</button>
                                     <button wire:click="toggleEdit"
                                         class="flex-1 bg-slate-200 text-slate-700 px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-300 transition">Batal</button>
                                 </div>
                             </div>
                         @else
                             <!-- View Mode -->
-                        @if($isEditing)
-                            <!-- Edit Mode -->
-                            <div class="space-y-4">
-                                <div>
-                                    <label for="phone" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">No. Telepon</label>
-                                    <input wire:model="phone" type="text" id="phone" class="w-full rounded-lg border-slate-300 shadow-sm focus:border-medical-blue focus:ring focus:ring-medical-blue focus:ring-opacity-50 text-sm">
-                                    @error('phone') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                                </div>
-                                <div>
-                                    <label for="address" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Alamat</label>
-                                    <textarea wire:model="address" id="address" rows="3" class="w-full rounded-lg border-slate-300 shadow-sm focus:border-medical-blue focus:ring focus:ring-medical-blue focus:ring-opacity-50 text-sm"></textarea>
-                                    @error('address') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                                </div>
-                                <div class="flex gap-2 pt-2">
-                                    <button wire:click="updateProfile" class="flex-1 bg-medical-blue text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">Simpan</button>
-                                    <button wire:click="toggleEdit" class="flex-1 bg-slate-200 text-slate-700 px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-300 transition">Batal</button>
+
+                            <div>
+                                <span
+                                    class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Biodata</span>
+                                <div class="mt-1 flex gap-2">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        {{ auth()->user()->patient->dob ?? '-' }}
+                                    </span>
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                        {{ auth()->user()->patient->gender == 'L' ? 'Laki-laki' : (auth()->user()->patient->gender == 'P' ? 'Perempuan' : '-') }}
+                                    </span>
                                 </div>
                             </div>
-                        @else
-                            <!-- View Mode -->
+
                             <div>
-                                <span class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">No. Telepon</span>
-                                <span class="block text-slate-700 font-medium">{{ auth()->user()->patient->phone ?? '-' }}</span>
+                                <span class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">No.
+                                    Telepon</span>
+                                <span
+                                    class="block text-slate-700 font-medium">{{ auth()->user()->patient->phone ?? '-' }}</span>
                             </div>
                             <div>
-                                <span class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Alamat</span>
-                                <span class="block text-slate-700 font-medium">{{ auth()->user()->patient->address ?? '-' }}</span>
+                                <span
+                                    class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Alamat</span>
+                                <span
+                                    class="block text-slate-700 font-medium">{{ auth()->user()->patient->address ?? '-' }}</span>
                             </div>
                             <div class="pt-2">
-                                <button wire:click="toggleEdit" class="text-medical-blue text-sm font-bold hover:underline">Ubah Data</button>
+                                <button wire:click="toggleEdit"
+                                    class="w-full mt-4 bg-linear-to-r from-medical-blue to-teal-500 text-white font-bold py-2 px-4 rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transform hover:-translate-y-0.5 transition-all duration-200">
+                                    Ubah Data
+                                </button>
                             </div>
                         @endif
                         <div class="pt-4 border-t border-slate-100">
@@ -237,7 +254,7 @@
                             <p class="mt-1 text-sm text-slate-500">Anda belum pernah melakukan pendaftaran antrian.</p>
                             <div class="mt-6">
                                 <a href="{{ route('patient.register') }}"
-                                    class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-medical-blue hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    class="inline-flex items-center px-4 py-2 border border-transparent shadow-lg shadow-blue-500/30 text-sm font-medium rounded-md text-white bg-linear-to-r from-medical-blue to-teal-500 hover:shadow-blue-500/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 hover:-translate-y-0.5">
                                     <svg class="-ml-1 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 4v16m8-8H4" />

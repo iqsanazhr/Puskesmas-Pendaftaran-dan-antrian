@@ -20,12 +20,25 @@ class AuthPage extends Component
     public $registerPassword;
     public $registerPasswordConfirmation;
     public $registerNik;
+    public $registerDob;
+    public $registerGender;
 
     // State
     public $isRegister = false;
 
     public function mount()
     {
+        if (Auth::check()) {
+            $role = Auth::user()->role;
+            if ($role === 'admin' || $role === 'doctor') {
+                return redirect()->route('admin.dashboard');
+            } elseif ($role === 'leader') {
+                return redirect()->route('leader.dashboard');
+            } else {
+                return redirect()->route('patient.dashboard');
+            }
+        }
+
         // Determine initial state based on route name
         if (Route::currentRouteName() === 'register') {
             $this->isRegister = true;
@@ -47,7 +60,14 @@ class AuthPage extends Component
         ]);
 
         if (Auth::attempt(['email' => $this->loginEmail, 'password' => $this->loginPassword])) {
-            return redirect()->route('admin.dashboard');
+            $role = Auth::user()->role;
+            if ($role === 'admin' || $role === 'doctor') {
+                return redirect()->route('admin.dashboard');
+            } elseif ($role === 'leader') {
+                return redirect()->route('leader.dashboard');
+            } else {
+                return redirect()->route('patient.dashboard');
+            }
         }
 
         $this->addError('loginEmail', 'Email atau password salah.');
@@ -60,6 +80,8 @@ class AuthPage extends Component
             'registerEmail' => 'required|string|email|max:255|unique:users,email',
             'registerPassword' => 'required|string|min:8|same:registerPasswordConfirmation',
             'registerNik' => 'required|numeric|digits:16|unique:users,nik',
+            'registerDob' => 'required|date',
+            'registerGender' => 'required|in:L,P',
         ]);
 
         $user = User::create([
@@ -70,9 +92,21 @@ class AuthPage extends Component
             'nik' => $this->registerNik,
         ]);
 
+        // Create Patient Profile immediately
+        \App\Models\Patient::create([
+            'user_id' => $user->id,
+            'nik' => $this->registerNik,
+            'name' => $this->registerName,
+            'dob' => $this->registerDob,
+            'gender' => $this->registerGender,
+            // Phone and Address will be filled later in dashboard/profile editing
+            'phone' => '-',
+            'address' => '-',
+        ]);
+
         Auth::login($user);
 
-        return redirect('/');
+        return redirect()->route('patient.dashboard');
     }
 
     public function render()

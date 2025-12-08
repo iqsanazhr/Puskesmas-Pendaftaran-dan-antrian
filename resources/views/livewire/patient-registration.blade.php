@@ -63,8 +63,8 @@
                                 <label for="nik" class="block text-sm font-semibold text-slate-700">NIK (Nomor Induk
                                     Kependudukan)</label>
                                 <div class="mt-1">
-                                    <input wire:model="nik" type="text" id="nik"
-                                        class="shadow-sm focus:ring-medical-blue focus:border-medical-blue block w-full sm:text-sm border-slate-300 rounded-xl px-4 py-3 placeholder-slate-400 font-medium"
+                                    <input wire:model="nik" type="text" id="nik" readonly
+                                        class="shadow-sm focus:ring-medical-blue focus:border-medical-blue block w-full sm:text-sm border-slate-300 rounded-xl px-4 py-3 placeholder-slate-400 font-medium bg-slate-100 text-slate-500 cursor-not-allowed"
                                         placeholder="Silakan masukkan 16 digit NIK">
                                 </div>
                                 @error('nik') <p class="mt-2 text-sm text-red-500">{{ $message }}</p> @enderror
@@ -74,8 +74,8 @@
                                 <label for="name" class="block text-sm font-semibold text-slate-700">Nama
                                     Lengkap</label>
                                 <div class="mt-1">
-                                    <input wire:model="name" type="text" id="name"
-                                        class="shadow-sm focus:ring-medical-blue focus:border-medical-blue block w-full sm:text-sm border-slate-300 rounded-xl px-4 py-3 placeholder-slate-400"
+                                    <input wire:model="name" type="text" id="name" readonly
+                                        class="shadow-sm focus:ring-medical-blue focus:border-medical-blue block w-full sm:text-sm border-slate-300 rounded-xl px-4 py-3 placeholder-slate-400 bg-slate-100 text-slate-500 cursor-not-allowed"
                                         placeholder="Sesuai KTP">
                                 </div>
                                 @error('name') <p class="mt-2 text-sm text-red-500">{{ $message }}</p> @enderror
@@ -85,12 +85,14 @@
                                 <label for="gender" class="block text-sm font-semibold text-slate-700">Jenis
                                     Kelamin</label>
                                 <div class="mt-1">
-                                    <select wire:model="gender" id="gender"
-                                        class="shadow-sm focus:ring-medical-blue focus:border-medical-blue block w-full sm:text-sm border-slate-300 rounded-xl px-4 py-3">
-                                        <option value="">Pilih Jenis Kelamin</option>
-                                        <option value="L">Laki-laki</option>
-                                        <option value="P">Perempuan</option>
-                                    </select>
+                                    {{-- Readonly Gender (Auto-filled) --}}
+                                    <input type="text"
+                                        value="{{ $gender == 'L' ? 'Laki-laki' : ($gender == 'P' ? 'Perempuan' : '-') }}"
+                                        readonly
+                                        class="shadow-sm focus:ring-medical-blue focus:border-medical-blue block w-full sm:text-sm border-slate-300 rounded-xl px-4 py-3 bg-slate-100 text-slate-500 cursor-not-allowed">
+                                    {{-- Hidden input to maintain wire:model binding if needed, though we enforce in
+                                    backend --}}
+                                    <input type="hidden" wire:model="gender">
                                 </div>
                                 @error('gender') <p class="mt-2 text-sm text-red-500">{{ $message }}</p> @enderror
                             </div>
@@ -99,8 +101,8 @@
                                 <label for="dob" class="block text-sm font-semibold text-slate-700">Tanggal
                                     Lahir</label>
                                 <div class="mt-1">
-                                    <input wire:model="dob" type="date" id="dob"
-                                        class="shadow-sm focus:ring-medical-blue focus:border-medical-blue block w-full sm:text-sm border-slate-300 rounded-xl px-4 py-3 text-slate-600">
+                                    <input wire:model="dob" type="date" id="dob" readonly
+                                        class="shadow-sm focus:ring-medical-blue focus:border-medical-blue block w-full sm:text-sm border-slate-300 rounded-xl px-4 py-3 text-slate-600 bg-slate-100 cursor-not-allowed">
                                 </div>
                                 @error('dob') <p class="mt-2 text-sm text-red-500">{{ $message }}</p> @enderror
                             </div>

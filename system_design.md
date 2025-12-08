@@ -193,6 +193,7 @@ classDiagram
         +name: string
         +email: string
         +role: string
+        +nik: string
         +patient(): HasOne
         +doctor(): HasOne
     }
@@ -201,6 +202,11 @@ classDiagram
         +id: int
         +user_id: int
         +nik: string
+        +name: string
+        +dob: date
+        +gender: string
+        +address: text
+        +phone: string
         +queues(): HasMany
         +user(): BelongsTo
     }
@@ -209,6 +215,7 @@ classDiagram
         +id: int
         +user_id: int
         +poly_id: int
+        +specialization: string
         +poly(): BelongsTo
         +queues(): HasMany
         +user(): BelongsTo
@@ -217,6 +224,7 @@ classDiagram
     class Poly {
         +id: int
         +name: string
+        +description: string
         +doctors(): HasMany
         +queues(): HasMany
     }
@@ -225,17 +233,37 @@ classDiagram
         +id: int
         +number: int
         +status: enum
+        +date: date
         +patient(): BelongsTo
         +doctor(): BelongsTo
         +poly(): BelongsTo
     }
 
+    class AuthPage {
+        +isRegister: bool
+        +registerDob: date
+        +registerGender: string
+        +login()
+        +register()
+        +toggleMode()
+    }
+
     class PatientRegistration {
+        +nik: string
+        +name: string
+        +dob: date
+        +gender: string
+        +address: string
+        +phone: string
+        +mount()
         +submit()
     }
 
     class PatientDashboard {
-        +queues: Collection
+        +address: string
+        +phone: string
+        +isEditing: bool
+        +updateProfile()
         +render()
     }
 
