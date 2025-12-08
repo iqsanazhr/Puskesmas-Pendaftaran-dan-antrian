@@ -1,4 +1,4 @@
-Dokumen ini berisi diagram dan tabel interaksi untuk memvisualisasikan arsitektur, alur kerja, dan struktur data dari Sistem Informasi Puskesmas Ajibarang.
+Dokumen ini berisi diagram dan tabel interaksi untuk memvisualisasikan arsitektur, alur kerja, dan struktur data dari Sistem Informasi Puskesmas Ajibarang 1.
 
 **Catatan Hak Akses**:
 
