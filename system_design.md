@@ -26,8 +26,6 @@ graph LR
         UC4(Monitor Antrian Real-time)
         UC5(Mengelola Profil Diri)
         UC6(Memanggil Pasien / Kelola Antrian)
-        UC7(Mengelola Data Pasien)
-        UC8(Mengelola Data Dokter & Poli)
         UC9(Melihat Pesan Masuk)
         UC10(Melihat Dashboard Statistik)
         UC11(Memberikan Masukan / Kontak)
@@ -47,10 +45,7 @@ graph LR
 
     A --> UC1
     A --> UC6
-    A --> UC7
-    A --> UC8
     A --> UC9
-    A --> UC3
 
     L --> UC1
     L --> UC10
